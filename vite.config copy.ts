@@ -12,59 +12,37 @@ import path from 'node:path';
 
 // 多页面配置开始-------------------------------------- 获取pnpm run dev后缀来运行对应的项目
 // 引入多页面配置文件
-const project = require('./scripts/multiPages.json')
-const projectName = process.argv.find(arg => arg.startsWith('--config.project='));
-let filterProjects: any = []
-if (projectName) {
-  const [, value] = projectName.split('=');
-  console.log('Project name:', value);
-  if(value == 'root') {
-    filterProjects = {
-      chunk: 'root',
-      chunkName: 'root'
-    }
+const multiPages = require('./scripts/multiPages.json')
+const projectName = process.argv.find(arg => arg.startsWith('--project='));
+// let filterProjects: any = []
+console.log("projectName",projectName);
+function getProject(projectName: string | undefined) {
+  const project = {
+    "chunk": "root",
+    "chunkName": "root"
   }
-  filterProjects = project.filter((ele) => {
+  if(!projectName) {
+    return project
+  }
+  const [, value] = projectName.split('=');
+  // console.log('Project name:', value);
+  // 如果项目名字是root，或者没有项目名字，返回root
+  if(!value || value === 'root') {
+    return project
+  }
+  // 否则返回项目名字
+  const resFilters = multiPages.filter((ele:any) => {
     // 过滤出用户输入的单独打包的配置项
     return ele.chunk.toLowerCase() === value.toLowerCase()
   })
-  console.log(`--------单独构建：${filterProjects[0]['chunkName']}--------`)
-} else {
-  filterProjects = project
+  
+  // console.log(`--------单独构建：${resFilters[0]['chunkName']}--------`)
+  return resFilters[0]
 }
-/** 多页面配置 */
-const multiPages = (p) => {
-  const pages = {}
-  p.forEach((ele) => {
-    const htmlUrl = path.resolve(
-      __dirname,
-      `src/Project/${ele.chunk}/index.html`
-    )
-    pages[ele.chunk] = htmlUrl
-  })
 
-  return pages
-}
-/**多页面打包 */
-const multiBuild = (p) => {
-  const buildOutputConfigs: any = []
-  p.forEach((ele) => {
-    // 配置多出口打包
-    buildOutputConfigs.push({
-      dir: `dist/${ele.chunk}/`,
-      experimentalMinChunkSize: 5 * 1024, // 生成的chunk最小体积，小于这个值的chunk会被合并到一个文件中}
-      chunkFileNames: 'static/js/[name]-[hash].js', // 引入文件名的名称
-      entryFileNames: 'static/js/[name]-[hash].js', // 包的入口文件名称
-      manualChunks(id) {
-        if (id.includes('node_modules')) {
-          return id.toString().match(/\/node_modules\/(?!.pnpm)(?<moduleName>[^\\/]*)\//)?.groups!.moduleName ?? 'vender';
-        }
-      },
-      assetFileNames: 'build/[ext]/[hash].[ext]', // 资源文件像 字体，图片等
-    })
-  })
-  return buildOutputConfigs
-}
+const project = getProject(projectName)
+console.log(`--------运行项目：${project['chunkName']}--------`);
+
 // 多页面配置结束 --------------------------------------
 
 const target = 'http://XXX';
@@ -81,11 +59,10 @@ export default defineConfig(({ command, mode }: ConfigEnv) => {
   return {
     root: (()=> {
       if(project.chunkName === 'root') {
-        return  './'
+        return path.resolve(__dirname, './')
       } 
-      return  `./src/project/${filterProjects[0]['chunk']}`
+      return path.resolve(__dirname, `./src/project/${project.chunkName}`)
     })(),
-    // root: `./src/project/${filterProjects[0]['chunk']}`,
     // base: isBuild ? './' : '/',
     base: './',
     server: {
@@ -111,15 +88,15 @@ export default defineConfig(({ command, mode }: ConfigEnv) => {
         }
       }
     },
-    // build: createBuild({viteEnv,project})
-    build: {
-      rollupOptions: {
-        //配置多页应用程序入口文件
-        input: multiPages(filterProjects),
-        //打包到目标目录
-        output: multiBuild(filterProjects)
-      }
-    },
+    build: createBuild({viteEnv,project})
+    // build: {
+    //   rollupOptions: {
+    //     //配置多页应用程序入口文件
+    //     input: multiPages(filterProjects),
+    //     //打包到目标目录
+    //     output: multiBuild(filterProjects)
+    //   }
+    // },
     // build: createBuild(viteEnv)
   };
 });
