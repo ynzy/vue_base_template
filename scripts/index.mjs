@@ -8,12 +8,19 @@
 import chalk from 'chalk'
 import path from 'path'
 import fs from 'fs'
+import { fileURLToPath } from 'node:url';
+
+// 获取当前模块的绝对URL
+const __filename = import.meta.url;
+
+// 将URL转换为文件路径
+const __dirname = path.dirname(fileURLToPath(__filename));
 
 const resolve = (__dirname, ...file) => path.resolve(__dirname, ...file)
 const log = (message) => console.log(chalk.green(`${message}`))
 const successLog = (message) => console.log(chalk.blue(`${message}`))
 const errorLog = (error) => console.log(chalk.red(`${error}`))
-log('请输入要生成的"页面名称:页面描述"、会生成在 /src/Project 目录下')
+log('请输入要生成的"页面名称:页面描述"、会生成在 /src/project 目录下')
 process.stdin.on('data', async (chunk) => {
   // 页面名称
   const content = String(chunk).trim().toString()
@@ -25,8 +32,8 @@ process.stdin.on('data', async (chunk) => {
   // 拆分用户输入的名称和描述
   const inputName = content.split(':')[0]
   const inputDosc = content.split(':')[1] || inputName
-  successLog(`将在 /src/Project 目录下创建 ${inputName} 文件夹`)
-  const targetPath = resolve('./src/Project', inputName)
+  successLog(`将在 /src/project 目录下创建 ${inputName} 文件夹`)
+  const targetPath = resolve('./src/project', inputName)
   // 判断页面文件夹是否存在
   const pageExists = fs.existsSync(targetPath)
   if (pageExists) {
@@ -51,11 +58,14 @@ process.stdin.on('data', async (chunk) => {
       if (index == -1) {
         //添加新数据
         let obj = {
+          projectName: inputDosc,
           chunk: inputName,
-          chunkName: inputDosc
+          chunkName: inputName,
         }
         datas.push(obj)
         setFile(datas)
+        // 调用方法添加命令
+        updateScriptsInPackageJsonSync(obj);
       }
     }
   )
@@ -66,7 +76,7 @@ process.stdin.on('data', async (chunk) => {
     // 通过writeFile改变数据内容
     fs.writeFile(
       path.resolve('./scripts', 'multiPages.json'),
-      JSON.stringify(datas),
+      JSON.stringify(datas, null,2),
       'utf-8',
       (err) => {
         if (err) throw err
@@ -115,3 +125,32 @@ const copyFile = (sourcePath, targetPath) => {
     }
   })
 }
+
+
+function updateScriptsInPackageJsonSync(obj) {
+  // 获取package.json文件路径
+  const packageJsonPath = path.resolve(__dirname, '../package.json');
+
+  // 读取并解析package.json文件
+  const packageJsonContent = fs.readFileSync(packageJsonPath, 'utf8');
+  const packageJson = JSON.parse(packageJsonContent);
+
+  // 定义新的scripts
+  const newScripts = {
+    [`start:${obj.chunk}`]: `vite -- --project=${obj.chunk}`,
+    [`build:${obj.chunk}`]: `vite build -- --project=${obj.chunk}`
+  };
+
+  // 合并新的scripts到现有的scripts中
+  if (!packageJson.scripts) {
+    packageJson.scripts = {};
+  }
+  packageJson.scripts = Object.assign(packageJson.scripts, newScripts);
+
+  // 更新package.json文件内容
+  const updatedJsonContent = JSON.stringify(packageJson, null, 2);
+  fs.writeFileSync(packageJsonPath, updatedJsonContent);
+
+  console.log(`Scripts for ${obj.chunk} have been added to the package.json file.`);
+}
+

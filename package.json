@@ -6,19 +6,16 @@
   "scripts": {
     "start": "vite",
     "start:root": "vite -- --project=root",
-    "start:daWoSi": "vite -- --project=daWoSi",
-    "start:test": "vite -- --project=test",
-    "dev": "vite",
+    "build:root": "vite build -- --project=root",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
-    "build:root": "vite build -- --project=root",
-    "build:daWoSi": "vite build -- --project=daWoSi",
-    "build:test": "vite build -- --project=test",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "new:page": "node ./scripts/index.mjs"
+    "new:page": "node ./scripts/index.mjs",
+    "start:daWoSi": "vite -- --project=daWoSi",
+    "build:daWoSi": "vite build -- --project=daWoSi"
   },
   "dependencies": {
     "pinia": "^2.1.7",
