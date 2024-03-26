@@ -28,7 +28,9 @@ export default defineConfig(({ command, mode }: ConfigEnv) => {
     plugins: [...createVitePlugins(viteEnv, isBuild)],
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url))
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+        '@project': fileURLToPath(new URL('./src/project', import.meta.url)),
+        '@daWoSi': fileURLToPath(new URL('./src/project/daWoSi', import.meta.url))
       }
     },
     css: {
