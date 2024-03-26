@@ -14,7 +14,7 @@ import path from 'node:path';
 // 引入多页面配置文件
 const project = require('./scripts/multiPages.json')
 const projectName = process.argv.find(arg => arg.startsWith('--config.project='));
-let filterProjects:any = []
+let filterProjects: any = []
 if (projectName) {
   const [, value] = projectName.split('=');
   console.log('Project name:', value);
@@ -36,36 +36,33 @@ const multiPages = (p) => {
     )
     pages[ele.chunk] = htmlUrl
   })
-  console.log('input',pages);
-  
+
   return pages
 }
 /**多页面打包 */
 const multiBuild = (p) => {
-  const buildOutputConfigs:any = []
+  const buildOutputConfigs: any = []
   p.forEach((ele) => {
     // 配置多出口打包
     buildOutputConfigs.push({
       dir: `dist/${ele.chunk}/`,
+      // chunkFileNames: 'static/js/[hash].js', // 引入文件名的名称
+      // entryFileNames: 'static/js/[hash].js', // 包的入口文件名称
+      // assetFileNames: 'static/[ext]/[hash].[ext]', // 资源文件像 字体，图片等
+      experimentalMinChunkSize: 5 * 1024, // 生成的chunk最小体积，小于这个值的chunk会被合并到一个文件中}
       // assetFileNames: '[ext]/[name]-[hash].[ext]',
+      // chunkFileNames: 'static/js/[name]-[hash].js',
+      // entryFileNames: 'static/js/[name]-[hash].js',
       chunkFileNames: 'static/js/[name]-[hash].js',
       entryFileNames: 'static/js/[name]-[hash].js',
-      assetFileNames: (chunkInfo: any) => {
-        const info = chunkInfo.name.split('.')
-        let extType = info[info.length - 1]
-        if (/\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/i.test(chunkInfo.name)) {
-            extType = 'media'
-        } else if (/\.(png|jpe?g|gif|svg)(\?.*)?$/.test(chunkInfo.name)) {
-            extType = 'images'
-        } else if (/\.(woff2?|eot|ttf|otf)(\?.*)?$/i.test(chunkInfo.name)) {
-            extType = 'fonts'
+      manualChunks(id) {
+        if (id.includes('node_modules')) {
+          return id.toString().match(/\/node_modules\/(?!.pnpm)(?<moduleName>[^\\/]*)\//)?.groups!.moduleName ?? 'vender';
         }
-        return `static/${ extType }/[name]-[hash][extname]`
-    }
+      },
+      assetFileNames: 'build/[ext]/[hash].[ext]', // 资源文件像 字体，图片等
     })
   })
-  console.log('output',buildOutputConfigs);
-
   return buildOutputConfigs
 }
 // 多页面配置结束 --------------------------------------
@@ -82,8 +79,9 @@ export default defineConfig(({ command, mode }: ConfigEnv) => {
   console.log('viteEnv', viteEnv);
   console.log('\x1B[33m%s\x1b[0m', '正在运行的环境:', viteEnv.VITE_ENV);
   return {
-    root: `./src/Project/${filterProjects[0]['chunk']}`,
-    base: isBuild ? './' : '/',
+    root: `./src/project/${filterProjects[0]['chunk']}`,
+    // base: isBuild ? './' : '/',
+    base: './',
     server: {
       host: true
       // proxy: createProxy(viteEnv, target)
@@ -113,6 +111,12 @@ export default defineConfig(({ command, mode }: ConfigEnv) => {
         input: multiPages(filterProjects),
         //打包到目标目录
         output: multiBuild(filterProjects)
+        // output: {
+        //   chunkFileNames: 'static/js/[hash].js', // 引入文件名的名称
+        //   entryFileNames: 'static/js/[hash].js', // 包的入口文件名称
+        //   assetFileNames: 'static/[ext]/[hash].[ext]', // 资源文件像 字体，图片等
+        //   experimentalMinChunkSize: 5 * 1024, // 生成的chunk最小体积，小于这个值的chunk会被合并到一个文件中}
+        // }
       }
     },
     // build: createBuild(viteEnv)
