@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-  import Main from "@daWoSi/views/main.vue";
+  import Main from "$daWoSi/views/main.vue";
 </script>
 <template>
   <Main />

@@ -74,7 +74,7 @@ export default defineConfig(({ command, mode }: ConfigEnv) => {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
         '@project': fileURLToPath(new URL('./src/project', import.meta.url)),
-        '@daWoSi': fileURLToPath(new URL('./src/project/daWoSi', import.meta.url))
+        '$daWoSi': fileURLToPath(new URL('./src/project/daWoSi', import.meta.url))
       }
     },
     css: {

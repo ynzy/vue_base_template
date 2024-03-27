@@ -19,7 +19,7 @@
       "@project/*": [
         "./src/project/*"
       ],
-      "@daWoSi/*": [
+      "$daWoSi/*": [
         "./src/project/daWoSi/*"
       ]
     }

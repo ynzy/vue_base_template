@@ -3,5 +3,6 @@
   <h2>大连达沃斯变电站</h2>
   <Com_index/>
   <Dawosi_index/>
+  <TestAssets/>
 </template>
 <script setup lang="ts"></script>

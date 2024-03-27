@@ -6,8 +6,6 @@ import path from 'path';
 import Components from 'unplugin-vue-components/vite';
 
 export function configAutoComponentsPlugin() {
-  console.log('path',);
-  
   return Components({
     // 指定组件位置，默认是src/components
     dirs: [
