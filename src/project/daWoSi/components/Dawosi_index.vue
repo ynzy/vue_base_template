@@ -1,8 +1,8 @@
 <script setup lang='ts'>
-  import Main from "@daWoSi/views/main.vue";
+
 </script>
 <template>
-  <Main />
+<div>达沃斯组件</div>
 </template>
 <style lang='scss' scoped>
 
