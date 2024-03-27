@@ -20,7 +20,5 @@ console.log(bluePng);
   background: red;
   background-image: url("$daWoSi/assets/images/blue.png");
   background-size: 100%;
-  // #{$daWoSi}
-  // background-image: url('#{$daWoSi}/assets/images/blue.png') 100% 100%;
 }
 </style>

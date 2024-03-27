@@ -4,5 +4,6 @@
   <Com_index/>
   <Dawosi_index/>
   <TestAssets/>
+  <TestFunction/>
 </template>
 <script setup lang="ts"></script>

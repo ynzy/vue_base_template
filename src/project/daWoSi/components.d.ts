@@ -12,5 +12,6 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TestAssets: typeof import('./components/TestAssets.vue')['default']
+    TestFunction: typeof import('./components/TestFunction.vue')['default']
   }
 }
