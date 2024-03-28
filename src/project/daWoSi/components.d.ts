@@ -11,6 +11,7 @@ declare module 'vue' {
     Dawosi_index: typeof import('./components/Dawosi_index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TestAirPower: typeof import('./components/TestAirPower.vue')['default']
     TestAssets: typeof import('./components/TestAssets.vue')['default']
     TestFunction: typeof import('./components/TestFunction.vue')['default']
   }

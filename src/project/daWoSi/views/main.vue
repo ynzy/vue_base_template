@@ -5,5 +5,6 @@
   <Dawosi_index/>
   <TestAssets/>
   <TestFunction/>
+  <TestAirPower/>
 </template>
 <script setup lang="ts"></script>
