@@ -14,5 +14,6 @@ declare module 'vue' {
     TestAirPower: typeof import('./components/TestAirPower.vue')['default']
     TestAssets: typeof import('./components/TestAssets.vue')['default']
     TestFunction: typeof import('./components/TestFunction.vue')['default']
+    TestState: typeof import('./components/TestState.vue')['default']
   }
 }
