@@ -15,7 +15,7 @@ import path from 'node:path';
 const multiPages = require('./scripts/multiPages.json')
 const projectName = process.argv.find(arg => arg.startsWith('--project='));
 // let filterProjects: any = []
-// console.log("projectName",projectName);
+console.log("projectName",projectName);
 function getProject(projectName: string | undefined) {
   const project = {
     "chunk": "root",
@@ -44,6 +44,7 @@ const project = getProject(projectName)
 console.log(`--------运行项目：${project['chunkName']}--------`);
 
 // 多页面配置结束 --------------------------------------
+
 const target = 'http://XXX';
 
 // https://vitejs.dev/config/
@@ -56,20 +57,12 @@ export default defineConfig(({ command, mode }: ConfigEnv) => {
   console.log('viteEnv', viteEnv);
   console.log('\x1B[33m%s\x1b[0m', '正在运行的环境:', viteEnv.VITE_ENV);
   return {
-    publicDir: (()=>{
-      if(project.chunkName === 'root') {
-        return path.join(__dirname, "public")
-      } 
-      return path.join(__dirname, `src/project/${project['chunk']}/public`) 
-    })(),
-    // publicDir: path.join(__dirname, "public"),
     root: (()=> {
       if(project.chunkName === 'root') {
-        return  './'
+        return path.resolve(__dirname, './')
       } 
-      return  `./src/project/${project['chunk']}`
+      return path.resolve(__dirname, `./src/project/${project.chunkName}`)
     })(),
-    // root: `./src/project/${filterProjects[0]['chunk']}`,
     // base: isBuild ? './' : '/',
     base: './',
     server: {
@@ -80,9 +73,8 @@ export default defineConfig(({ command, mode }: ConfigEnv) => {
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
-        '$project': fileURLToPath(new URL('./src/project', import.meta.url)),
-        // '$daWoSi': fileURLToPath(new URL('./src/project/daWoSi', import.meta.url))
-        '$daWoSi': path.resolve(__dirname, './src/project/daWoSi')
+        '@project': fileURLToPath(new URL('./src/project', import.meta.url)),
+        '$daWoSi': fileURLToPath(new URL('./src/project/daWoSi', import.meta.url))
       }
     },
     css: {
@@ -90,8 +82,9 @@ export default defineConfig(({ command, mode }: ConfigEnv) => {
         scss: {
           charset: false, // 避免出现: build时的 @charset 必须在第一行的警告
           additionalData: `
-            @import "@/common/assets/css/alias.scss";
-          `
+            @import "@/styles/mixin.scss";
+            @import "@/styles/variables.scss";
+            `
         }
       }
     },

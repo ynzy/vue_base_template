@@ -1,0 +1,153 @@
+{
+    "code": 200,
+    "data": {
+        "total": 12,
+        "result": [
+            {
+                "unitCarLicense": "HY001（浙A96B97+浙ADX21",
+                "unitName": "HY001",
+                "unitCode": "HY001",
+                "driver":"王伟1",
+                "phoneNumber":"13758170634",
+                "company":"国网浙江杭州市萧山区供电公司",
+                "status": "运行",
+                "longitude": 120.268768,
+                "latitude": 30.112167,
+                "type": "发电车"
+            },
+            {
+                "unitCarLicense": "HY001（浙A96B97+浙ADX21",
+                "unitName": "HY001",
+                "unitCode": "HY001",
+                "driver":"王伟2",
+                "phoneNumber":"13758170634",
+                "company":"国网浙江杭州市萧山区供电公司",
+                "status": "运行",
+                "longitude": 120.268768,
+                "latitude": 30.112167,
+                "type": "发电车"
+            },
+            {
+                "unitCarLicense": "HY001（浙A96B97+浙ADX21",
+                "unitName": "HY001",
+                "unitCode": "HY001",
+                "driver":"王伟3",
+                "phoneNumber":"13758170634",
+                "company":"国网浙江杭州市萧山区供电公司",
+                "status": "运行",
+                "longitude": 120.268768,
+                "latitude": 30.112167,
+                "type": "发电车"
+            },
+            {
+                "unitCarLicense": "HY001（浙A96B97+浙ADX21",
+                "unitName": "HY001",
+                "unitCode": "HY001",
+                "driver":"王伟",
+                "phoneNumber":"13758170634",
+                "company":"国网浙江杭州市萧山区供电公司",
+                "status": "运行",
+                "longitude": 120.268768,
+                "latitude": 30.112167,
+                "type": "发电车"
+            },
+            {
+                "unitCarLicense": "HY001（浙A96B97+浙ADX21",
+                "unitName": "HY001",
+                "unitCode": "HY001",
+                "driver":"王伟",
+                "phoneNumber":"13758170634",
+                "company":"国网浙江杭州市萧山区供电公司",
+                "status": "运行",
+                "longitude": 120.268768,
+                "latitude": 30.112167,
+                "type": "发电车"
+            },
+            {
+                "unitCarLicense": "HY001（浙A96B97+浙ADX21",
+                "unitName": "HY001",
+                "unitCode": "HY001",
+                "driver":"王伟",
+                "phoneNumber":"13758170634",
+                "company":"国网浙江杭州市萧山区供电公司",
+                "status": "运行",
+                "longitude": 120.268768,
+                "latitude": 30.112167,
+                "type": "发电车"
+            },
+            {
+                "unitCarLicense": "HY001（浙A96B97+浙ADX21",
+                "unitName": "HY001",
+                "unitCode": "HY001",
+                "driver":"王伟",
+                "phoneNumber":"13758170634",
+                "company":"国网浙江杭州市萧山区供电公司",
+                "status": "运行",
+                "longitude": 120.268768,
+                "latitude": 30.112167,
+                "type": "发电车"
+            },
+            {
+                "unitCarLicense": "HY002（浙A7Z262+浙ADW72",
+                "unitName": "HY002",
+                "unitCode": "HY002",
+                "driver":"王伟",
+                "phoneNumber":"13758170634",
+                "company":"国网浙江杭州市萧山区供电公司",
+                "status": "运行",
+                "longitude": 120.37624,
+                "latitude": 30.225495,
+                "type": "发电车"
+            },
+            {
+                "unitCarLicense": "HY004（浙A07B98）",
+                "unitName": "HY004",
+                "unitCode": "HY004",
+                "driver":"王伟",
+                "phoneNumber":"13758170634",
+                "company":"国网浙江杭州市萧山区供电公司",
+                "status": "运行",
+                "longitude": 120.377876,
+                "latitude": 30.228695,
+                "type": "发电车"
+            },
+            {
+                "unitCarLicense": "HY005（浙A5Z798）",
+                "unitName": "HY005",
+                "unitCode": "HY005",
+                "driver":"王伟",
+                "phoneNumber":"13758170634",
+                "company":"国网浙江杭州市萧山区供电公司",
+                "status": "运行",
+                "longitude": 120.370811,
+                "latitude": 30.226971,
+                "type": "发电车"
+            },
+            {
+                "unitCarLicense": "HY006（浙A0V362）",
+                "unitName": "HY006",
+                "unitCode": "HY006",
+                "driver":"王伟",
+                "phoneNumber":"13758170634",
+                "company":"国网浙江杭州市萧山区供电公司",
+                "status": "运行",
+                "longitude": 120.373551,
+                "latitude": 30.226866,
+                "type": "发电车"
+            },
+            {
+                "unitCarLicense": "HY007（浙A6Z283）",
+                "unitName": "HY007",
+                "unitCode": "HY007",
+                "driver":"王伟",
+                "phoneNumber":"13758170634",
+                "company":"国网浙江杭州市萧山区供电公司",
+                "status": "运行",
+                "longitude": 120.370773,
+                "latitude": 30.226923,
+                "type": "发电车"
+            }
+        ]
+    },
+    "status": "success"
+}
