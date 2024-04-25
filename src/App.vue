@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import Home from './views/Home/index.vue'
+import HelloWorld from './components/HelloWorld.vue'
+import {test} from '@/stateFactory'
+test()
 </script>
 
 <template>
