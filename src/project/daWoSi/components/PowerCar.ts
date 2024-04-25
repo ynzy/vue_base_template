@@ -65,8 +65,22 @@ let json = {
     local: "世界"
   }
 }
+let json2 = {
+  "username1": "Hamm",
+  num: "60",
+  // bio: "xxx12",
+  status: 2,
+  lastLoginTime: 1711598057992, // 毫秒时间戳
+  "userInfo": {
+    "age": "20",
+    local: "世界"
+  }
+}
+console.log(json);
 
+// 接口请求
 const user = User.fromJson(json)
+console.log(user);
 
 // const dict = getDictionary(User, "status") // 获取不到
 const dict = getDictionary(User.prototype, 'status')
@@ -76,7 +90,7 @@ console.log('获取一个字典',dict?.get(UserStatus.ENABLED));
 const res = ref<User>(user)
 console.log('ref',res.value);
 res.value.bio = '我给这个字段加了值'
-console.log('user',user.toJson());
+console.log('usertoJson',user.toJson());
 
 
 // const userModel = new User()

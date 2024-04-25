@@ -15,7 +15,9 @@
     "format": "prettier --write src/",
     "new:page": "node ./scripts/index.mjs",
     "start:daWoSi": "vite -- --project=daWoSi",
-    "build:daWoSi": "vite build -- --project=daWoSi"
+    "build:daWoSi": "vite build -- --project=daWoSi",
+    "start:test": "vite -- --project=test",
+    "build:test": "vite build -- --project=test"
   },
   "dependencies": {
     "airpower": "^0.0.11",

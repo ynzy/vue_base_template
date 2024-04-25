@@ -1,7 +1,7 @@
 <script setup lang='ts'>
-import {test} from '$daWoSi/state'
-import type {changeOptions} from '$daWoSi/state'
-test()
+import  '$daWoSi/state'
+// import type {changeOptions} from '$daWoSi/state'
+// test()
 
 </script>
 <template>
