@@ -6,12 +6,16 @@
   "command": "npm run build-only",
   "cwd": "D:/github/vue_base_template",
   "distPath": "D:\\github\\vue_base_template\\dist",
-  "commit": "5e7d80d",
-  "builtAt": "2026-05-08T08:13:09.067Z",
+  "commit": "50447f2",
+  "builtAt": "2026-05-09T06:12:47.808Z",
+  "previousBuild": {
+    "commit": "5e7d80d",
+    "builtAt": "2026-05-08T08:13:09.067Z"
+  },
   "gitLog": {
-    "range": "HEAD",
-    "commitCount": 19,
-    "mdPath": "D:\\github\\vue_base_template\\.quick-release\\release-logs\\build-20260508-161309.md",
-    "relativeMdPath": ".quick-release/release-logs/build-20260508-161309.md"
+    "range": "5e7d80d..HEAD",
+    "commitCount": 1,
+    "mdPath": "D:\\github\\vue_base_template\\.quick-release\\release-logs\\build-20260509-141247.md",
+    "relativeMdPath": ".quick-release/release-logs/build-20260509-141247.md"
   }
 }
